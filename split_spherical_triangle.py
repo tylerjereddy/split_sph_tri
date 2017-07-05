@@ -50,3 +50,20 @@ def t_12(angle_b, subtriangle_area, arc_length_C):
     result = math.cos(arc_length_C) * math.cos(angle_b) - \
              math.cos(angle_b - subtriangle_area)
     return result
+
+def t_16(t_3, t_8, t_4, t_6):
+    '''Returns the value of t_16.'''
+    result = t_3 * t_8 + t_4 * t_6
+    return result
+
+def t_9(angle_b, subtriangle_area):
+    '''Returns the value of t_9.'''
+    result = math.cos(angle_b - subtriangle_area) - \
+             math.cos(angle_b)
+    return result
+
+def t_10(angle_b, subtriangle_area):
+    '''Returns the value of t_10.'''
+    result = math.sin(angle_b - subtriangle_area) - \
+            math.sin(angle_b)
+    return result
