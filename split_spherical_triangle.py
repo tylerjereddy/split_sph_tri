@@ -33,3 +33,20 @@ def t_20(t_15, t_12, t_16, t_10):
     '''Returns the value of t_20.'''
     result = t_15 * t_12 + t_16 * t_10
     return result
+
+def t_15(t_3, t_7, t_4, t_5):
+    '''Returns the value of t_15.'''
+    result = t_3 * t_7 + t_4 * t_5
+    return result
+
+def t_11(angle_b, subtriangle_area, arc_length_C):
+    '''Returns the value of t_11.'''
+    result = math.sin(angle_b - subtriangle_area) - \
+             math.cos(arc_length_C) * math.sin(angle_b)
+    return result
+
+def t_12(angle_b, subtriangle_area, arc_length_C):
+    '''Returns the value of t_12.'''
+    result = math.cos(arc_length_C) * math.cos(angle_b) - \
+             math.cos(angle_b - subtriangle_area)
+    return result
