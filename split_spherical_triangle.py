@@ -18,3 +18,18 @@ def y_angle(t_19, t_18, t_20):
     denominator = 2. * t_20
     y = math.atan(numerator / denominator)
     return y
+
+def t_19(t_15, t_11, t_16, t_9):
+    '''Returns the value of t_19.'''
+    result = t_15 * t_11 + t_16 * t_9
+    return result
+
+def t_18(t_13, t_12, t_14, t_10):
+    '''Returns the value of t_18.'''
+    result = t_13 * t_12 + t_14 * t_10
+    return result
+
+def t_20(t_15, t_12, t_16, t_10):
+    '''Returns the value of t_20.'''
+    result = t_15 * t_12 + t_16 * t_10
+    return result
