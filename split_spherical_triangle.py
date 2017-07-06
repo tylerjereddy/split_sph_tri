@@ -19,6 +19,30 @@ def y_angle(t_19, t_18, t_20):
     y = math.atan(numerator / denominator)
     return y
 
+def t_1(angle_c, subtriangle_area):
+    '''Returns the value of t_1.'''
+    result = math.cos(angle_c - subtriangle_area) - \
+             math.cos(angle_c)
+    return result
+
+def t_2(angle_c, subtriangle_area):
+    '''Returns the value of t_2.'''
+    result = math.sin(angle_c - subtriangle_area) - \
+             math.sin(angle_c)
+    return result
+
+def t_3(angle_c, arc_length_A, subtriangle_area):
+    '''Returns the value of t_3.'''
+    result = math.sin(angle_c - subtriangle_area) - \
+             math.cos(arc_length_A) * math.sin(angle_c)
+    return result
+
+def t_4(angle_c, arc_length_A, subtriangle_area):
+    '''Returns the value of t_4.'''
+    result = math.cos(arc_length_A) * math.cos(angle_c) - \
+             math.cos(angle_c - subtriangle_area)
+    return result
+
 def t_9(angle_b, subtriangle_area):
     '''Returns the value of t_9.'''
     result = math.cos(angle_b - subtriangle_area) - \
