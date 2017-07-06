@@ -19,24 +19,16 @@ def y_angle(t_19, t_18, t_20):
     y = math.atan(numerator / denominator)
     return y
 
-def t_19(t_15, t_11, t_16, t_9):
-    '''Returns the value of t_19.'''
-    result = t_15 * t_11 + t_16 * t_9
+def t_9(angle_b, subtriangle_area):
+    '''Returns the value of t_9.'''
+    result = math.cos(angle_b - subtriangle_area) - \
+             math.cos(angle_b)
     return result
 
-def t_18(t_13, t_12, t_14, t_10):
-    '''Returns the value of t_18.'''
-    result = t_13 * t_12 + t_14 * t_10
-    return result
-
-def t_20(t_15, t_12, t_16, t_10):
-    '''Returns the value of t_20.'''
-    result = t_15 * t_12 + t_16 * t_10
-    return result
-
-def t_15(t_3, t_7, t_4, t_5):
-    '''Returns the value of t_15.'''
-    result = t_3 * t_7 + t_4 * t_5
+def t_10(angle_b, subtriangle_area):
+    '''Returns the value of t_10.'''
+    result = math.sin(angle_b - subtriangle_area) - \
+            math.sin(angle_b)
     return result
 
 def t_11(angle_b, subtriangle_area, arc_length_C):
@@ -51,19 +43,27 @@ def t_12(angle_b, subtriangle_area, arc_length_C):
              math.cos(angle_b - subtriangle_area)
     return result
 
+def t_15(t_3, t_7, t_4, t_5):
+    '''Returns the value of t_15.'''
+    result = t_3 * t_7 + t_4 * t_5
+    return result
+
 def t_16(t_3, t_8, t_4, t_6):
     '''Returns the value of t_16.'''
     result = t_3 * t_8 + t_4 * t_6
     return result
 
-def t_9(angle_b, subtriangle_area):
-    '''Returns the value of t_9.'''
-    result = math.cos(angle_b - subtriangle_area) - \
-             math.cos(angle_b)
+def t_18(t_13, t_12, t_14, t_10):
+    '''Returns the value of t_18.'''
+    result = t_13 * t_12 + t_14 * t_10
     return result
 
-def t_10(angle_b, subtriangle_area):
-    '''Returns the value of t_10.'''
-    result = math.sin(angle_b - subtriangle_area) - \
-            math.sin(angle_b)
+def t_19(t_15, t_11, t_16, t_9):
+    '''Returns the value of t_19.'''
+    result = t_15 * t_11 + t_16 * t_9
+    return result
+
+def t_20(t_15, t_12, t_16, t_10):
+    '''Returns the value of t_20.'''
+    result = t_15 * t_12 + t_16 * t_10
     return result
