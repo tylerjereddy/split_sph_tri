@@ -61,6 +61,12 @@ def t_7(angle_a, subtriangle_area, arc_length_B):
              math.cos(arc_length_B) * math.sin(angle_a)
     return result
 
+def t_8(arc_length_B, angle_a, subtriangle_area):
+    '''Returns the value of t_8.'''
+    result = math.cos(arc_length_B) * math.cos(angle_a) - \
+             math.cos(angle_a - subtriangle_area)
+    return result
+
 def t_9(angle_b, subtriangle_area):
     '''Returns the value of t_9.'''
     result = math.cos(angle_b - subtriangle_area) - \
