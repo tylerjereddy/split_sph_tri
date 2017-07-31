@@ -111,6 +111,11 @@ def t_16(t_3, t_8, t_4, t_6):
     result = t_3 * t_8 + t_4 * t_6
     return result
 
+def t_17(t_13, t_11, t_14, t_9):
+    '''Returns the value of t_17.'''
+    result = t_13 * t_11 + t_14 * t_9
+    return result
+
 def t_18(t_13, t_12, t_14, t_10):
     '''Returns the value of t_18.'''
     result = t_13 * t_12 + t_14 * t_10
