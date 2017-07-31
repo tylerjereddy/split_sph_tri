@@ -130,3 +130,8 @@ def t_20(t_15, t_12, t_16, t_10):
     '''Returns the value of t_20.'''
     result = t_15 * t_12 + t_16 * t_10
     return result
+
+def tan_y(t_19, t_18, t_20):
+    '''Returns the value of tan_y.'''
+    result = -(t_19 - t_18) / (2. * t_20)
+    return result
