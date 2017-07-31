@@ -91,6 +91,11 @@ def t_12(angle_b, subtriangle_area, arc_length_C):
              math.cos(angle_b - subtriangle_area)
     return result
 
+def t_13(t_1, t_7, t_2, t_5):
+    '''Returns the value of t_13.'''
+    result = t_1 * t_7 + t_2 * t_5
+    return result
+
 def t_15(t_3, t_7, t_4, t_5):
     '''Returns the value of t_15.'''
     result = t_3 * t_7 + t_4 * t_5
