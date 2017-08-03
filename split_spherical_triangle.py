@@ -140,3 +140,8 @@ def tan_x(t_9, t_10, t_11, t_12, tan_y):
     '''Returns the value of tan_x.'''
     result = (t_9 + t_10 * tan_y) / (t_11 + t_12 * tan_y)
     return result
+
+def tan_z(t_5, t_6, t_7, t_8, tan_x):
+    '''Returns the value of tan_z.'''
+    result = (t_5 + t_6 * tan_x) / (t_7 + t_8 * tan_x)
+    return result
