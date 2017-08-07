@@ -61,7 +61,7 @@ def t_7(angle_a, subtriangle_area, arc_length_B):
              math.cos(arc_length_B) * math.sin(angle_a)
     return result
 
-def t_8(arc_length_B, angle_a, subtriangle_area):
+def t_8(angle_a, subtriangle_area, arc_length_B):
     '''Returns the value of t_8.'''
     result = math.cos(arc_length_B) * math.cos(angle_a) - \
              math.cos(angle_a - subtriangle_area)
@@ -212,3 +212,5 @@ def determine_angles(input_coords, sphere_radius, original_tri_area):
     t4 = t_4(angle_c, arc_length_A, subtriangle_area)
     t5 = t_5(angle_a, subtriangle_area)
     t6 = t_6(angle_a, subtriangle_area)
+    t7 = t_7(angle_a, subtriangle_area, arc_length_B)
+    t8 = t_8(angle_a, subtriangle_area, arc_length_B)
