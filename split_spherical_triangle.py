@@ -204,3 +204,9 @@ def determine_angles(input_coords, sphere_radius, original_tri_area):
                                        (math.sin(arc_length_A) * math.sin(arc_length_C))))
     angle_c = 2. * math.asin(math.sqrt((math.sin(s - arc_length_A) * math.sin(s - arc_length_B)) /
                                        (math.sin(arc_length_A) * math.sin(arc_length_B))))
+
+    # calculate all the t term values
+    t1 = t_1(angle_c, subtriangle_area)
+    t2 = t_2(angle_c, subtriangle_area)
+    t3 = t_3(angle_c, arc_length_A, subtriangle_area)
+    t4 = t_4(angle_c, arc_length_A, subtriangle_area)
