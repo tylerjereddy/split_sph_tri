@@ -226,3 +226,13 @@ def determine_angles(input_coords, sphere_radius, original_tri_area):
     t18 = t_18(t13, t12, t14, t10)
     t19 = t_19(t15, t11, t16, t9)
     t20 = t_20(t15, t12, t16, t10)
+
+    # finally, calculate the values of x, y, z
+    tany = tan_y(t19, t18, t20)
+    tanx = tan_x(t9, t10, t11, t12, tany)
+    tanz = tan_z(t5, t6, t7, t8, tanx)
+
+    y = math.atan2(tany)
+    x = math.atan2(tanx)
+    z = math.atan2(tanz)
+    return (x, y, z)
