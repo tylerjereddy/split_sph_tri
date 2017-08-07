@@ -145,3 +145,62 @@ def tan_z(t_5, t_6, t_7, t_8, tan_x):
     '''Returns the value of tan_z.'''
     result = (t_5 + t_6 * tan_x) / (t_7 + t_8 * tan_x)
     return result
+
+def calculate_Vincenty_distance_between_spherical_points(cartesian_array_1,cartesian_array_2,sphere_radius):
+    '''Apparently, the special case of the Vincenty formula
+	(http://en.wikipedia.org/wiki/Great-circle_distance)
+        may be the most accurate method for calculating great-circle distances.'''
+    spherical_array_1 = convert_cartesian_array_to_spherical_array(cartesian_array_1)
+    spherical_array_2 = convert_cartesian_array_to_spherical_array(cartesian_array_2)
+    lambda_1 = spherical_array_1[1]
+    lambda_2 = spherical_array_2[1]
+    phi_1 = spherical_array_1[2]
+    phi_2 = spherical_array_2[2]
+    delta_lambda = abs(lambda_2 - lambda_1)
+    delta_phi = abs(phi_2 - phi_1)
+    radian_angle = math.atan2( math.sqrt( (math.sin(phi_2)*math.sin(delta_lambda))**2 + (math.sin(phi_1)*math.cos(phi_2) - math.cos(phi_1)*math.sin(phi_2)*math.cos(delta_lambda)  )**2 ),  (math.cos(phi_1) * math.cos(phi_2) + math.sin(phi_1) * math.sin(phi_2) * math.cos(delta_lambda) ) )
+    spherical_distance = sphere_radius * radian_angle
+    return spherical_distance
+
+def convert_cartesian_array_to_spherical_array(coord_array,angle_measure='radians'):
+    '''Take shape (N,3) cartesian coord_array and return an array of the same shape in spherical polar form (r, theta, phi). Based on StackOverflow response: http://stackoverflow.com/a/4116899
+    use radians for the angles by default, degrees if angle_measure == 'degrees' '''
+    spherical_coord_array = numpy.zeros(coord_array.shape)
+    xy = coord_array[...,0]**2 + coord_array[...,1]**2
+    spherical_coord_array[...,0] = numpy.sqrt(xy + coord_array[...,2]**2)
+    spherical_coord_array[...,1] = numpy.arctan2(coord_array[...,1], coord_array[...,0])
+    spherical_coord_array[...,2] = numpy.arccos(coord_array[...,2] / spherical_coord_array[...,0])
+    if angle_measure == 'degrees':
+        spherical_coord_array[...,1] = numpy.degrees(spherical_coord_array[...,1])
+        spherical_coord_array[...,2] = numpy.degrees(spherical_coord_array[...,2])
+    return spherical_coord_array
+
+def determine_angles(input_coords, sphere_radius, original_tri_area):
+    '''Returns the values of the angles
+    x, y, z (for specification of the point
+    that splits the triangle into three
+    equal area subtriangles)
+    based on the Cartesian coords
+    of the input spherical triangle.
+    '''
+    A = input_coords[0,...]
+    B = input_coords[1,...]
+    C = input_coords[2,...]
+
+    arc_length_A = calculate_Vincenty_distance_between_spherical_points(B, C, sphere_radius)
+    arc_length_B = calculate_Vincenty_distance_between_spherical_points(A, C, sphere_radius)
+    arc_length_C = calculate_Vincenty_distance_between_spherical_points(A, B, sphere_radius)
+
+    s = 0.5 * (arc_length_A + arc_length_B + arc_length_C)
+
+    subtriangle_area = original_tri_area / 3.
+
+    # use the semiperimeter (s) and arc lengths to solve for the requisite
+    # spherical triangle angles based on equations made available at
+    # http://mathworld.wolfram.com/SphericalTrigonometry.html
+    angle_a = 2. * math.asin(math.sqrt((math.sin(s - arc_length_B) * math.sin(s - arc_length_C)) /
+                                       (math.sin(arc_length_B) * math.sin(arc_length_C))))
+    angle_b = 2. * math.asin(math.sqrt((math.sin(s - arc_length_A) * math.sin(s - arc_length_C)) /
+                                       (math.sin(arc_length_A) * math.sin(arc_length_C))))
+    angle_c = 2. * math.asin(math.sqrt((math.sin(s - arc_length_A) * math.sin(s - arc_length_B)) /
+                                       (math.sin(arc_length_A) * math.sin(arc_length_B))))
