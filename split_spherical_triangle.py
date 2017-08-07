@@ -210,3 +210,5 @@ def determine_angles(input_coords, sphere_radius, original_tri_area):
     t2 = t_2(angle_c, subtriangle_area)
     t3 = t_3(angle_c, arc_length_A, subtriangle_area)
     t4 = t_4(angle_c, arc_length_A, subtriangle_area)
+    t5 = t_5(angle_a, subtriangle_area)
+    t6 = t_6(angle_a, subtriangle_area)
