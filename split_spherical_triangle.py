@@ -236,3 +236,18 @@ def determine_angles(input_coords, sphere_radius, original_tri_area):
     x = math.atan2(tanx)
     z = math.atan2(tanz)
     return (x, y, z)
+
+def determine_center_point_angles(x,y,z,
+                                  original_tri_area,
+                                  a,b,c,
+                                  sphere_radius):
+    '''Determine the angles u,v,w around the desired
+    center point D that splits the spherical triangle
+    into three equal area subtriangles.'''
+    u = (original_tri_area / (3. * sphere_radius ** 2.)) + math.pi - \
+        y - c + z
+    v = (original_tri_area / (3. * sphere_radius ** 2.)) + math.pi - \
+        a + x - z
+    w = (original_tri_area / (3. * sphere_radius ** 2.)) + math.pi - \
+        x - b + y
+    return (u,v,w)
