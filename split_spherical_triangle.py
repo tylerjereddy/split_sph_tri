@@ -251,3 +251,17 @@ def determine_center_point_angles(x,y,z,
     w = (original_tri_area / (3. * sphere_radius ** 2.)) + math.pi - \
         x - b + y
     return (u,v,w)
+
+def determine_subtriangle_arc_lengths(x,y,z
+                                      arc_length_A,
+                                      arc_length_B,
+                                      arc_length_C,
+                                      u,v,w):
+        '''Determine the three unknown arc lengths that
+        define the great circle distances between the three
+        vertices of the original spherical triangle, and the
+        unknown equi-area dividing point, D.'''
+        arc_length_CD = math.asin((math.sin(arc_length_A) * math.sin(y)) / math.sin(u))
+        arc_length_BD = math.asin((math.sin(arc_length_C) * math.sin(x)) / math.sin(w))
+        arc_length_AD = math.asin((math.sin(arc_length_B) * math.sin(z)) / math.sin(v))
+        return (arc_length_AD, arc_length_BD, arc_length_CD)
