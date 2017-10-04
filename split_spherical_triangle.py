@@ -266,3 +266,11 @@ def determine_subtriangle_arc_lengths(x,y,z
         arc_length_AD = math.asin((math.sin(arc_length_B) * math.sin(z)) / math.sin(v))
         return (arc_length_AD, arc_length_BD, arc_length_CD)
 
+def sphere_chord_length(arc_length, sphere_radius):
+    '''Calculate and return the value of the Euclidean
+    chord length between two points on the surface of
+    a sphere with the provided sphere_radius based
+    on the provided geodesic arc_length.'''
+    # based on rearrangement of the equations provided at
+    # https://en.wikipedia.org/wiki/Great-circle_distance#From_chord_length
+    return 2. * math.sin(arc_length / (2. * sphere_radius))
