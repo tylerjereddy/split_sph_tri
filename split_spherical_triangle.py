@@ -274,3 +274,18 @@ def sphere_chord_length(arc_length, sphere_radius):
     # based on rearrangement of the equations provided at
     # https://en.wikipedia.org/wiki/Great-circle_distance#From_chord_length
     return 2. * math.sin(arc_length / (2. * sphere_radius))
+
+def determine_chord_lengths(arc_length_AD, arc_length_BD, arc_length_CD,
+                            sphere_radius):
+    '''Calculate and return the chord lengths between the known vertex
+    coords A, B, C and the desired vertex D using the geodesic arc lengths.'''
+    # the motivation for calculating these three chord lengths is that
+    # we are then well-positioned for spherical trilateration (each chord
+    # length is the radius of a sphere centered at A, B, or C), which
+    # is a reasonably well-defined problem for the isolation of the coords
+    # of D
+    list_chord_lengths = []
+    for geodesic in [arc_length_AD, arc_length_BD, arc_length_CD]:
+        list_chord_lengths.append(sphere_chord_length(geodesic, sphere_radius))
+
+    return list_chord_lengths # AB, BD, CD
