@@ -289,3 +289,35 @@ def determine_chord_lengths(arc_length_AD, arc_length_BD, arc_length_CD,
         list_chord_lengths.append(sphere_chord_length(geodesic, sphere_radius))
 
     return list_chord_lengths # AB, BD, CD
+
+def trilateration_D(chord_length_AD,
+                    chord_length_BD,
+                    chord_length_CD,
+                    coord_A,
+                    coord_B,
+                    coord_C):
+    '''Trilateration procedure to determine Cartesian coords of special
+    point D.'''
+    # based on:
+    # https://en.wikipedia.org/wiki/Trilateration
+    # and -- https://gis.stackexchange.com/a/415
+
+    r1 = chord_length_AD
+    r2 = chord_length_BD
+    r3 = chord_length_CD
+
+    ex = (coord_B - coord_A) / numpy.linalg.norm(coord_B - coord_A)
+    i = numpy.dot(ex, coord_C - coord_A)
+    ey = (coord_C - coord_A - i * ex) / (numpy.linalg.norm(coord_C - coord_A - i * ex))
+    ez = numpy.cross(ex, ey)
+    d = numpy.linalg.norm(coord_B - coord_A)
+    j = numpy.dot(ey, coord_C - coord_A)
+
+    # solve for x, y, z coords of D
+    D_x = (r1 ** 2 - r2 ** 2 + d ** 2) / (2. * d)
+    D_y = ((r1 ** 2 - r3 ** 2 + i ** 2 + j ** 2) / (2. * j)) - ((i/j) * x))
+    # assuming a single positive value of z for applications here
+    # but be aware that can be 0, 1 or 2 values for z
+    D_z = np.sqrt(r1 ** 2 - D_x ** 2 - D_y ** 2)
+
+    return np.array([D_x, D_y, D_z])
