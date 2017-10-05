@@ -235,7 +235,7 @@ def determine_angles(input_coords, sphere_radius, original_tri_area):
     y = math.atan2(tany)
     x = math.atan2(tanx)
     z = math.atan2(tanz)
-    return (x, y, z)
+    return (x, y, z, angle_a, angle_b, angle_c)
 
 def determine_center_point_angles(x,y,z,
                                   original_tri_area,
@@ -321,3 +321,48 @@ def trilateration_D(chord_length_AD,
     D_z = np.sqrt(r1 ** 2 - D_x ** 2 - D_y ** 2)
 
     return np.array([D_x, D_y, D_z])
+
+def find_ternary_split_point(triangle_vertices, sphere_radius, original_tri_area):
+    '''Determine the Cartesian coordinates of the point D that
+    splits the provided spherical triangle into three equal
+    area subtriangles.'''
+    
+    coord_A = triangle_vertices[0]
+    coord_B = triangle_vertices[1]
+    coord_C = triangle_vertices[2]
+
+    (x, y, z,
+     angle_a,
+     angle_b,
+     angle_c) = determine_angles(triangle_vertices,
+                                 sphere_radius,
+                                 original_tri_area)
+
+     u, v, w = determine_center_point_angles(x, y, z,
+                                             original_tri_area,
+                                             angle_a,
+                                             angle_b,
+                                             angle_c,
+                                             sphere_radius)
+
+    (arc_length_AD,
+     arc_length_BD,
+     arc_length_CD) = determine_subtriangle_arc_lengths(x, y, z,
+                                                        arc_length_A,
+                                                        arc_length_B,
+                                                        arc_length_C,
+                                                        u, v, w)
+
+    (chord_length_AD,
+     chord_length_BD,
+     chord_length_CD) = determine_chord_lengths(arc_length_AD,
+                                                arc_length_BD,
+                                                arc_length_CD,
+                                                sphere_radius)
+    D = trilateration_D(chord_length_AD,
+                        chord_length_BD,
+                        chord_length_CD,
+                        coord_A,
+                        coord_B,
+                        coord_C)
+    return D
